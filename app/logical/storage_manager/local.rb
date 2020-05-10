@@ -41,6 +41,14 @@ class StorageManager::Local < StorageManager
     end
   end
 
+  def move_file_replacement(post, replacement, direction)
+    if direction == :to_replacement
+      move_file(file_path(post, post.file_ext, :original), replacement_path(replacement, replacement.file_ext))
+    else
+      move_file(replacement_path(replacement, replacement.file_ext), file_path(post, post.file_ext, :original))
+    end
+  end
+
   private
 
   def move_file(old_path, new_path)
